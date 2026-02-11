@@ -52,15 +52,22 @@ loan_amount = st.number_input("Loan Amount", value=120.0)
 gender_value = 1 if gender == "Male" else 0
 marital_value = 1 if marital_status == "Yes" else 0
 
+# Convert dependents properly
+if dependents == "3+":
+    dependents_value = 3
+else:
+    dependents_value = int(dependents)
+
 # Prediction
 if st.button("Predict Loan Status"):
-    input_data = [[gender_value, marital_value, dependents, credit_history, loan_amount]]
+    input_data = [[gender_value, marital_value, dependents_value, credit_history, loan_amount]]
     prediction = model.predict(input_data)[0]
 
     if prediction == 1:
         st.success("Loan Approved")
     else:
         st.error("Loan Not Approved")
+
 
 
 
