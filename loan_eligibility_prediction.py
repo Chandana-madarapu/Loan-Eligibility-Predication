@@ -52,11 +52,11 @@ loan_amount = st.number_input("Loan Amount", value=120.0)
 gender_value = 1 if gender == "Male" else 0
 marital_value = 1 if marital_status == "Yes" else 0
 
-# Convert dependents properly
-if dependents == "3+":
-    dependents_value = 3
-else:
-    dependents_value = int(dependents)
+# Fix Dependents column properly
+train['Dependents'] = train['Dependents'].replace('3+', 3)
+train['Dependents'] = train['Dependents'].fillna(train['Dependents'].mode()[0])
+train['Dependents'] = train['Dependents'].astype(int)
+
 
 # Prediction
 if st.button("Predict Loan Status"):
