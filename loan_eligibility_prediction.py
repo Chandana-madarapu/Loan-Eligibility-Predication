@@ -10,6 +10,8 @@ train = pd.read_csv("loan-train.csv")
 test = pd.read_csv("loan-test.csv")
 
 # Handle missing values
+train['Dependents'] = train['Dependents'].replace('3+', 3)
+train['Dependents'] = train['Dependents'].astype(int)
 train['Gender'].fillna(train['Gender'].mode()[0], inplace=True)
 train['Married'].fillna(train['Married'].mode()[0], inplace=True)
 train['Dependents'].fillna(train['Dependents'].mode()[0], inplace=True)
